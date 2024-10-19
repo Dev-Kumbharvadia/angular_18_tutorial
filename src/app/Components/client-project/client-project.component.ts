@@ -1,6 +1,9 @@
 import { formatCurrency } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ClientService } from '../../services/client.service';
+import { APIResponseModel, IEmployee } from '../../model/interface/interface';
+import { Client } from '../../model/class/class';
 
 @Component({
   selector: 'app-client-project',
@@ -27,7 +30,36 @@ export class ClientProjectComponent implements OnInit {
     clientId: new FormControl(0),
   });
 
-
+clientService =inject(ClientService)
   
-  ngOnInit(): void {}
+employeeList: IEmployee[] = [];
+clientList: Client[] = [];
+
+  ngOnInit(): void {
+    this.getAllClients();
+    this.getAllEmployee();
+  }
+
+  getAllEmployee(){
+    this.clientService.getAllEmployee().subscribe((res: APIResponseModel) => {
+      this.employeeList = res.data;
+    })
+  }
+
+  getAllClients(){
+    this.clientService.getAllClients().subscribe((res: APIResponseModel) => {
+      this.clientList = res.data;
+    })
+  }
+
+  onSaveProject() {
+    const formValue = this.projectForm.value;
+    this.clientService.addAddClientUpdate(formValue).subscribe((res:APIResponseModel) => {
+      if(res.result){
+        alert('project created')
+      } else {
+        alert(res.message);
+      }
+    });
+  }
 }

@@ -3,17 +3,20 @@ import { Client } from '../../model/class/class';
 import { FormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 import { APIResponseModel } from '../../model/interface/interface';
+import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-client',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, UpperCasePipe, DatePipe, JsonPipe],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',
 })
 export class ClientComponent implements OnInit {
+
   clientObj: Client = new Client();
   clientList: Client[] = [];
+  currentDate: Date = new Date();
 
   clientService = inject(ClientService);
 
