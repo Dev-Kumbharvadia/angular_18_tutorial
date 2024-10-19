@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { APIResponseModel, IRole } from '../../model/interface/role';
+import { APIResponseModel, IRole } from '../../model/interface/interface';
 
 @Component({
   selector: 'app-roles',
