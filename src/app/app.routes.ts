@@ -5,6 +5,7 @@ import { ClientComponent } from './components/client/client.component';
 import { ClientProjectComponent } from './components/client-project/client-project.component';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -19,22 +20,23 @@ export const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate: [authGuard],
         children: [
             {
                 path: 'master',
-                component: MaseterComponent
+                component: MaseterComponent,
             },
             {
                 path: 'employee',
-                component: EmployeeComponent
+                component: EmployeeComponent,
             },
             {
                 path: 'client',
-                component: ClientComponent
+                component: ClientComponent,
             },
             {
                 path: 'client-project',
-                component: ClientProjectComponent
+                component: ClientProjectComponent,
             }
         ]
     },
