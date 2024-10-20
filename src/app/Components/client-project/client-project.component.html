@@ -1,8 +1,11 @@
+<app-alert [alertType]="'Error'" [message]="'Project Page'"> </app-alert>
 <div>
   <div class="row">
     <div class="col-8">
       <div class="card">
-        <div class="card-header bg-success">Project List</div>
+        <div class="card-header bg-success">Project List - {{firstName( )}}
+          <button class="btn btn-danger" (click)="changeFname()">Change Signal Value</button>
+        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-12">
@@ -10,18 +13,26 @@
                 <thead>
                   <tr>
                     <th>Sr No</th>
-                    <th>Project Name</th>
+                    <th>Client Name</th>
+                    <th>project Name</th>
+                    <th>Emp Nmae</th>
                     <th>Start Date</th>
-                    <th>Expected End Date</th>
-                    <th>Lead By Employee ID</th>
-                    <th>Completed Date</th>
-                    <th>Contact Person</th>
-                    <th>Contact No</th>
-                    <th>Total Employees</th>
-                    <th>Project Cost</th>
                     <th class="text-center">Action</th>
                   </tr>
                 </thead>
+                @for (item of projectList(); track $index) {
+                  <tr>
+                    <td>{{$index + 1}}</td>
+                    <td>{{ item.clientName }}</td>
+                    <td>{{ item.projectName }}</td>
+                    <td>{{ item.empName }}</td>
+                    <td>{{ item.startDate | date }}</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary">Edit</button>
+                      <button class="btn btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                }
                 <tbody>
                 </tbody>
               </table>
